@@ -1,0 +1,276 @@
+{
+    "destination": {
+        "region": {
+            "value": null,
+            "weight": 0
+        },
+        "country": {
+            "value": null,
+            "weight": 0
+        },
+        "city": {
+            "value": null,
+            "weight": 0
+        },
+        "area": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "dates": {
+        "start": {
+            "value": null,
+            "weight": 0
+        },
+        "end": {
+            "value": null,
+            "weight": 0
+        },
+        "flexible": {
+            "value": null,
+            "weight": 0
+        },
+        "duration_days": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "budget": {
+        "max_per_night": {
+            "value": null,
+            "weight": 0
+        },
+        "currency": {
+            "value": null,
+            "weight": 0
+        },
+        "level": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "travelers": {
+        "adults": {
+            "value": null,
+            "weight": 0
+        },
+        "children": {
+            "value": null,
+            "weight": 0
+        },
+        "children_ages": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "trip_type": {
+        "value": null,
+        "weight": 0
+    },
+
+    "landscape": {
+        "value": null,
+        "weight": 0
+    },
+
+    "view": {
+        "type": {
+            "value": null,
+            "weight": 0
+        },
+        "quality": {
+            "value": null,
+            "weight": 0
+        },
+        "from_room": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "preferences": {
+
+        "near_sea": {
+            "value": null,
+            "weight": 0
+        },
+
+        "beach": {
+            "value": null,
+            "weight": 0
+        },
+
+        "mountains": {
+            "value": null,
+            "weight": 0
+        },
+
+        "nature": {
+            "value": null,
+            "weight": 0
+        },
+
+        "skiing": {
+            "value": null,
+            "weight": 0
+        },
+
+        "hiking": {
+            "value": null,
+            "weight": 0
+        },
+
+        "cycling": {
+            "value": null,
+            "weight": 0
+        },
+
+        "water_activities": {
+            "value": null,
+            "weight": 0
+        },
+
+        "spa": {
+            "value": null,
+            "weight": 0
+        },
+
+        "wellness": {
+            "value": null,
+            "weight": 0
+        },
+
+        "quiet": {
+            "value": null,
+            "weight": 0
+        },
+
+        "nightlife": {
+            "value": null,
+            "weight": 0
+        },
+
+        "walkability": {
+            "value": null,
+            "weight": 0
+        },
+
+        "restaurants_nearby": {
+            "value": null,
+            "weight": 0
+        },
+
+        "bars_nearby": {
+            "value": null,
+            "weight": 0
+        },
+
+        "attractions_nearby": {
+            "value": null,
+            "weight": 0
+        },
+
+        "old_town_nearby": {
+            "value": null,
+            "weight": 0
+        },
+
+        "city_center_nearby": {
+            "value": null,
+            "weight": 0
+        },
+
+        "public_transport_nearby": {
+            "value": null,
+            "weight": 0
+        },
+
+        "family_friendly": {
+            "value": null,
+            "weight": 0
+        },
+
+        "romantic": {
+            "value": null,
+            "weight": 0
+        },
+
+        "luxury": {
+            "value": null,
+            "weight": 0
+        },
+
+        "authentic_local_experience": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "hotel_preferences": {
+
+        "hotel_rating": {
+            "value": null,
+            "weight": 0
+        },
+
+        "room_size": {
+            "value": null,
+            "weight": 0
+        },
+
+        "breakfast": {
+            "value": null,
+            "weight": 0
+        },
+
+        "pool": {
+            "value": null,
+            "weight": 0
+        },
+
+        "parking": {
+            "value": null,
+            "weight": 0
+        },
+
+        "air_conditioning": {
+            "value": null,
+            "weight": 0
+        },
+
+        "kitchen": {
+            "value": null,
+            "weight": 0
+        },
+
+        "balcony": {
+            "value": null,
+            "weight": 0
+        },
+
+        "terrace": {
+            "value": null,
+            "weight": 0
+        },
+
+        "pet_friendly": {
+            "value": null,
+            "weight": 0
+        },
+
+        "adults_only": {
+            "value": null,
+            "weight": 0
+        }
+    },
+
+    "must_have": [],
+
+    "nice_to_have": [],
+
+    "unknown": []
+}
