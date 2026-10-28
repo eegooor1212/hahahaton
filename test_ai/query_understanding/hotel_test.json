@@ -1,0 +1,228 @@
+[{
+  "destination": {
+    "country": {
+      "value": "Греция",
+      "weight": 0
+    },
+    "region": {
+      "value": "Крит",
+      "weight": 0
+    },
+    "city": {
+      "value": "Ханья",
+      "weight": 0
+    },
+    "area": {
+      "value": "Агиа-Марина",
+      "weight": 0
+    }
+  },
+  "dates": {
+    "start": {
+      "value": null,
+      "weight": 0
+    },
+    "end": {
+      "value": null,
+      "weight": 0
+    },
+    "flexible": {
+      "value": null,
+      "weight": 0
+    },
+    "duration_days": {
+      "value": null,
+      "weight": 0
+    }
+  },
+  "budget": {
+    "max_per_night": {
+      "value": 155,
+      "weight": 0
+    },
+    "currency": {
+      "value": "EUR",
+      "weight": 0
+    },
+    "level": {
+      "value": "средний",
+      "weight": 0
+    }
+  },
+  "travelers": {
+    "adults": {
+      "value": 2,
+      "weight": 0
+    },
+    "children": {
+      "value": 0,
+      "weight": 0
+    },
+    "children_ages": {
+      "value": [],
+      "weight": 0
+    }
+  },
+  "hotel_preferences": {
+    "hotel_rating": {
+      "value": 4,
+      "weight": 0
+    },
+    "room_size": {
+      "value": 28,
+      "weight": 0
+    },
+    "breakfast": {
+      "value": true,
+      "weight": 0
+    },
+    "pool": {
+      "value": true,
+      "weight": 0
+    },
+    "parking": {
+      "value": true,
+      "weight": 0
+    },
+    "air_conditioning": {
+      "value": true,
+      "weight": 0
+    },
+    "kitchen": {
+      "value": false,
+      "weight": 0
+    },
+    "balcony": {
+      "value": true,
+      "weight": 0
+    },
+    "terrace": {
+      "value": true,
+      "weight": 0
+    },
+    "pet_friendly": {
+      "value": false,
+      "weight": 0
+    },
+    "adults_only": {
+      "value": false,
+      "weight": 0
+    }
+  },
+  "trip_type": {
+    "value": "пляжный отдых",
+    "weight": 0
+  },
+  "landscape": {
+    "value": "море",
+    "weight": 0
+  },
+  "view": {
+    "type": {
+      "value": "море",
+      "weight": 0
+    },
+    "quality": {
+      "value": "панорамный",
+      "weight": 0
+    },
+    "from_room": {
+      "value": true,
+      "weight": 0
+    }
+  },
+  "preferences": {
+    "near_sea": {
+      "value": true,
+      "weight": 0
+    },
+    "beach": {
+      "value": true,
+      "weight": 0
+    },
+    "mountains": {
+      "value": false,
+      "weight": 0
+    },
+    "nature": {
+      "value": true,
+      "weight": 0
+    },
+    "skiing": {
+      "value": false,
+      "weight": 0
+    },
+    "hiking": {
+      "value": false,
+      "weight": 0
+    },
+    "cycling": {
+      "value": false,
+      "weight": 0
+    },
+    "water_activities": {
+      "value": true,
+      "weight": 0
+    },
+    "spa": {
+      "value": false,
+      "weight": 0
+    },
+    "wellness": {
+      "value": false,
+      "weight": 0
+    },
+    "quiet": {
+      "value": true,
+      "weight": 0
+    },
+    "nightlife": {
+      "value": false,
+      "weight": 0
+    },
+    "walkability": {
+      "value": true,
+      "weight": 0
+    },
+    "restaurants_nearby": {
+      "value": true,
+      "weight": 0
+    },
+    "bars_nearby": {
+      "value": false,
+      "weight": 0
+    },
+    "attractions_nearby": {
+      "value": true,
+      "weight": 0
+    },
+    "old_town_nearby": {
+      "value": false,
+      "weight": 0
+    },
+    "city_center_nearby": {
+      "value": false,
+      "weight": 0
+    },
+    "public_transport_nearby": {
+      "value": true,
+      "weight": 0
+    },
+    "family_friendly": {
+      "value": true,
+      "weight": 0
+    },
+    "romantic": {
+      "value": true,
+      "weight": 0
+    },
+    "luxury": {
+      "value": false,
+      "weight": 0
+    },
+    "authentic_local_experience": {
+      "value": true,
+      "weight": 0
+    }
+  }
+}]

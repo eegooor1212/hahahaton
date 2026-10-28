@@ -1,304 +1,59 @@
+# -*- coding: utf-8 -*-
+
 import json
 import ollama
 import time
 import copy
-
+import os
+from openai import OpenAI
+import requests
+import httpx
 
 SYSTEM_PROMPT = """
-Ты — модуль понимания запросов для сервиса поиска отелей.
+Ты — модуль извлечения требований для поиска отелей.
 
-Твоя задача:
-преобразовать естественный язык пользователя в структурированный JSON.
+Преобразуй запрос пользователя в JSON.
 
-Никогда не придумывай значения, которых нет в запросе. добавляй поля ТОЛЬКО если они указаны в запросе явно
+Извлекай только информацию, явно присутствующую в запросе.
+Не делай предположений и не выводи одно требование из другого.
 
-Шаблон:
-{
-    "destination": {
-        "region": {
-            "value": null,
-            "weight": 0
-        },
-        "country": {
-            "value": null,
-            "weight": 0
-        },
-        "city": {
-            "value": null,
-            "weight": 0
-        },
-        "area": {
-            "value": null,
-            "weight": 0
-        }
-    },
+Разрешено географическое уточнение destination 
+(city → country → region).
 
-    "dates": {
-        "start": {
-            "value": null,
-            "weight": 0
-        },
-        "end": {
-            "value": null,
-            "weight": 0
-        },
-        "flexible": {
-            "value": null,
-            "weight": 0
-        },
-        "duration_days": {
-            "value": null,
-            "weight": 0
-        }
-    },
+Для каждого найденного параметра указывай:
+- value — значение, обязательно на английском языке;
+- weight — важность требования от 0 до 100.
 
-    "budget": {
-        "max_per_night": {
-            "value": null,
-            "weight": 0
-        },
-        "currency": {
-            "value": null,
-            "weight": 0
-        },
-        "level": {
-            "value": null,
-            "weight": 0
-        }
-    },
+Обычное требование: 60.
+"желательно": 30.
+"важно": 80.
+"обязательно": 100.
 
-    "travelers": {
-        "adults": {
-            "value": null,
-            "weight": 0
-        },
-        "children": {
-            "value": null,
-            "weight": 0
-        },
-        "children_ages": {
-            "value": null,
-            "weight": 0
-        }
-    },
+Не возвращай параметры, которых нет в запросе.
+Не возвращай null.
+Не возвращай weight = 0.
 
-    "hotel_preferences": {
+Используй только параметры из разрешённой схемы.
 
-        "hotel_rating": {
-            "value": null,
-            "weight": 0
-        },
-
-        "room_size": {
-            "value": null,
-            "weight": 0
-        },
-
-        "breakfast": {
-            "value": null,
-            "weight": 0
-        },
-
-        "pool": {
-            "value": null,
-            "weight": 0
-        },
-
-        "parking": {
-            "value": null,
-            "weight": 0
-        },
-
-        "air_conditioning": {
-            "value": null,
-            "weight": 0
-        },
-
-        "kitchen": {
-            "value": null,
-            "weight": 0
-        },
-
-        "balcony": {
-            "value": null,
-            "weight": 0
-        },
-
-        "terrace": {
-            "value": null,
-            "weight": 0
-        },
-
-        "pet_friendly": {
-            "value": null,
-            "weight": 0
-        },
-
-        "adults_only": {
-            "value": null,
-            "weight": 0
-        }
-    },
-    "trip_type": {
-            "value": null,
-            "weight": 0
-        },
-    
-        "landscape": {
-            "value": null,
-            "weight": 0
-        },
-    
-        "view": {
-            "type": {
-                "value": null,
-                "weight": 0
-            },
-            "quality": {
-                "value": null,
-                "weight": 0
-            },
-            "from_room": {
-                "value": null,
-                "weight": 0
-            }
-        },
-    
-        "preferences": {
-    
-            "near_sea": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "beach": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "mountains": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "nature": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "skiing": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "hiking": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "cycling": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "water_activities": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "spa": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "wellness": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "quiet": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "nightlife": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "walkability": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "restaurants_nearby": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "bars_nearby": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "attractions_nearby": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "old_town_nearby": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "city_center_nearby": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "public_transport_nearby": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "family_friendly": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "romantic": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "luxury": {
-                "value": null,
-                "weight": 0
-            },
-    
-            "authentic_local_experience": {
-                "value": null,
-                "weight": 0
-            }
-        },
-}
-
-заполни его данными, учитывая что value это значение конкретного поля из запроса вноси его на английском языке, если поля в запросе нет, но оставляй его без изменения. weight отражает важность каждого поля запроса, его также заполнять только если поле есть в запросе. weight идёт по 100-бальной шкале где 0-20 низкая важность поля, 21-40 ниже среднего важность поля, 41-60 средняя важность поля, 61-80 выше среднего важность поля 81-100 очень важное поле
-
-Верни только те параметры, которые пользователь
-упомянул в запросе. Не додумывай за пользователя значения, заполняй поля ТОЛЬКО ЕСЛИ ОНИ УКАЗАНЫ ЯВНО.
-
-Не возвращай параметры со значением null.
-
-В JSON который ты генерируешь оставляй ТОЛЬКО те поля которые есть в запросе пользователя НИКАКИХ дургих полей писать нельзя, если во всём json данные остаются null, возвращай просто пустой json
+Возвращай только валидный JSON без Markdown и пояснений.
 """
+
+http_client = httpx.Client(
+    trust_env=False,
+    timeout=60.0
+)
+
+client = OpenAI(
+    api_key=os.environ["LLM_API_KEY"],
+    base_url="https://api.inferhold.com/v1",
+    http_client=http_client
+)
 
 def parse_query(user_query):
 
-    start = time.time()
+    response = client.chat.completions.create(
+        model="gpt-6.1-terra",
 
-    response = ollama.chat(
-        model="qwen3:1.7b",
         messages=[
             {
                 "role": "system",
@@ -309,21 +64,12 @@ def parse_query(user_query):
                 "content": user_query
             }
         ],
-        think=False,
-        options={
-            "temperature": 0,
-            "num_predict": 2000
-        }
+
+        temperature=0,
+        max_tokens=500
     )
 
-    elapsed = time.time() - start
-
-    print(f"\nВремя: {elapsed:.2f} сек")
-    print(f"Сгенерировано токенов: {response.get('eval_count')}")
-    print(f"Скорость: {response.get('eval_count', 0) / elapsed:.2f} ток/сек")
-    print(f"Причина остановки: {response.get('done_reason')}")
-
-    return response["message"]["content"]
+    return response.choices[0].message.content
 
 def merge_query_with_template(template_path, model_result, output_path="query.json"):
     """
@@ -379,7 +125,6 @@ def merge_query_with_template(template_path, model_result, output_path="query.js
 
 
 def main():
-
     print("Qwen Hotel Query Parser")
     print("=======================\n")
 
@@ -429,5 +174,5 @@ def main():
             print("\n" + "=" * 60 + "\n")
 
 
-if __name__ == "__main__":
+if __name__=='__main__':
     main()
